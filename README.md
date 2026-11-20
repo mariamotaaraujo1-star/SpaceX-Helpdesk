@@ -20,12 +20,14 @@ O objetivo é reduzir o trabalho manual de classificação de chamados e dar ao 
 
 | Nome | Papel |
 |------|-------|
-| Nome do integrante 1 | (ex.: Analista de requisitos) |
-| Nome do integrante 2 | (ex.: Desenvolvedor) |
-| Nome do integrante 3 | (ex.: Designer / Testes) |
+| Julia Cristina| Scrum Master |
+| Maria Mota | Product Owner |
+| Daniel | Desenvolvedor Back End |
+| Lohan | Desenvolvedor Front End |
+| Gisele| Desenvolvedora UX/UC |
 
-**Professor(a):** Nome do professor
-**Instituição / Turma:** Nome da instituição – Turma XX
+**Professor(a):** Raulison Rezende
+**Instituição / Turma:** Universidade São Judas Tadeu - Campus Paulista 
 
 ---
 
