@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Help Desk</title>
+<style>
+:root{--bg:#f3f4f8;--card:#fff;--tx:#17212f;--mut:#5d6b80;--bd:#e1e5ee;--pri:#3f51b5;--on:#fff;--ok:#1b7f4b;--bad:#c0392b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1622;--card:#182233;--tx:#e8edf5;--mut:#9aa8bd;--bd:#2a3750;--pri:#5a74e8;--on:#fff;--ok:#4cc88a;--bad:#ff7b6b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1622;--card:#182233;--tx:#e8edf5;--mut:#9aa8bd;--bd:#2a3750;--pri:#5a74e8;--on:#fff;--ok:#4cc88a;--bad:#ff7b6b;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:0 16px 40px}
+h2{font-size:1.05rem;margin:24px 0 10px}
+a{color:var(--pri)}
+button{padding:10px 16px;border:0;border-radius:8px;background:var(--pri);color:var(--on);font:inherit;font-weight:600;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+input,textarea,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+small{color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;box-shadow:0 2px 10px #1a237e14}
+.t{margin-bottom:10px;border-left:4px solid var(--pri)}.t b{display:block}
+.res{border-color:var(--ok)}
+.ok{color:var(--ok);font-weight:600}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;border:1px solid var(--bd);font-size:.8rem;margin:0 6px 4px 0}
+.tag.alta,.tag.critica{border-color:var(--bad);color:var(--bad)}
+.hist{margin:8px 0 0;padding-left:18px;color:var(--mut);font-size:.85rem}
+.d{margin:6px 0 0}
+[hidden]{display:none!important}
+/* chat do cliente */
+.chat{background:var(--card);border:1px solid var(--bd);border-radius:16px;box-shadow:0 2px 14px #1a237e1a;overflow:hidden;max-width:760px;margin:20px auto 0}
+.ch{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:2px solid var(--bd)}
+.ch b{font-size:1.2rem;flex:1}
+.logo{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle,#6a8fd8,#1b3a7a);display:grid;place-items:center;color:#fff;font-size:1.3rem}
+.wel{text-align:center;padding:36px 24px}
+.wel .logo{width:96px;height:96px;font-size:2.6rem;margin:0 auto 14px}
+.wel h3{margin:0 0 6px}.wel input{max-width:280px;margin:14px auto 0;display:block}
+.wel button{margin-top:14px;background:#2b2fd1;color:#fff;padding:10px 28px}
+#msgs{height:340px;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.m{white-space:pre-line;max-width:78%;padding:12px 16px;border-radius:14px;border:1px solid var(--bd);box-shadow:0 1px 4px #0001;background:var(--card)}
+.m.me{align-self:flex-end;background:var(--pri);color:var(--on);border:0}
+#opts{padding:0 18px 12px;display:flex;flex-wrap:wrap;gap:8px;min-height:8px}
+.chip{background:var(--card);color:var(--tx);border:1px solid var(--tx);border-radius:6px;font-weight:400;font-size:.85rem;padding:6px 12px}
+.inp{display:flex;gap:8px;padding:12px 18px;border-top:1px solid var(--bd)}
+.inp button{background:#2a5bd7;color:#fff}
+/* painel da equipe */
+.hd{background:linear-gradient(120deg,#4a5bc4,#2f3d8f);color:#fff;padding:16px 16px 52px;border-radius:0 0 50% 50%/0 0 28px 28px}
+.hi{max-width:860px;margin:0 auto 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.hi a{color:#fff;font-size:.85rem}
+.tabs{max-width:860px;margin:0 auto;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tabs button{background:#fff;color:#2f3d8f;border-radius:6px;font-size:.85rem;padding:7px 18px;opacity:.75}
+.tabs button.on{opacity:1;box-shadow:0 2px 8px #0003}
+#ve main{margin-top:-26px;position:relative}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stats div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;box-shadow:0 2px 10px #1a237e14}
+.stats b{font-size:1.7rem;display:block;line-height:1.2}
+.bar{display:grid;grid-template-columns:1fr 150px;gap:10px;margin-bottom:12px}
+.rw{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;padding:12px 14px;margin-bottom:8px;background:var(--card);border:1px solid var(--bd);border-radius:10px;cursor:pointer}
+.rw:hover{border-color:var(--pri)}
+.rw small{display:block}
+.pr{font-weight:700;font-size:.8rem}
+.pr.alta{color:#d93025}.pr.critica{color:#9c1c12}.pr.media{color:#d89200}.pr.baixa{color:var(--mut)}
+.us{display:flex;align-items:center;gap:8px;font-size:.9rem}
+.av{width:28px;height:28px;border-radius:50%;background:var(--pri);color:var(--on);display:grid;place-items:center;font-size:.7rem;font-style:normal}
+.g2{display:grid;grid-template-columns:5fr 7fr;gap:14px;align-items:start}
+@media(max-width:700px){.g2{grid-template-columns:1fr}}
+.ia{background:linear-gradient(135deg,#4a5bc4,#7a5bc4);color:#fff;border-radius:12px;padding:14px;margin-top:12px}
+.ia small{color:#e6e9ff}.ia button{background:#ffc107;color:#2b2200;margin-top:10px;width:100%}
+.cv{display:flex;flex-direction:column;gap:10px;max-height:460px;overflow:auto}
+.cv .m{max-width:85%}
+.fm label{display:block;font-size:.85rem;color:var(--mut);margin:12px 0 4px}
+.star{background:none;color:#e0a800;font-size:1.4rem;padding:0 2px}
+@media(max-width:560px){.rw{grid-template-columns:1fr auto}.us span{display:none}}
+</style>
+</head>
+<body>
+
+<div id="vc">
+<main>
+<div style="text-align:right;margin-top:14px"><a href="#equipe" style="display:inline-block;padding:8px 16px;border:1px solid var(--pri);border-radius:99px;text-decoration:none;font-weight:600">🎧 Sou da equipe: abrir a tela de atendimento</a></div>
+<div class="chat">
+  <div class="ch"><div class="logo">🚀</div><b>SpaceX</b><span aria-hidden="true">📹 📞 ⚙️</span></div>
+  <div id="welcome" class="wel">
+    <div class="logo">🚀</div>
+    <h3>Olá, seja bem-vindo ao SpaceX</h3>
+    <small>Canal oficial de atendimento de TI &amp; Operações. Clique abaixo para iniciar e registrar a sua solicitação na plataforma.</small>
+    <input id="nome" placeholder="Seu nome" autocomplete="name" aria-label="Seu nome">
+    <button id="start">Iniciar Atendimento</button>
+  </div>
+  <div id="chatbox" hidden>
+    <div id="msgs" aria-live="polite"></div>
+    <div id="opts"></div>
+    <div class="inp">
+  <input
+    id="txt"
+    placeholder="Digite ou fale seu problema..."
+    aria-label="Mensagem"
+  >
+
+  <button id="voice" type="button">
+    🎤
+  </button>
+
+  <button id="send">
+    Enviar
+  </button>
+</div>
+</div>
+<h2 id="mc">Meus chamados</h2>
+<button id="demo" type="button" style="margin:0 0 12px">Ver exemplo de chamado resolvido</button>
+<div id="lc"></div>
+<p><small><a href="#equipe">Área da equipe</a> · versão 5</small></p>
+</main>
+</div>
+
+<div id="ve" hidden>
+<header class="hd">
+  <div class="hi"><div><b>🎧 DeskOps.AI</b><br><small style="color:#dfe4ff">Workspace do Analista</small></div><a href="#cliente">Ir para o chat do cliente</a></div>
+  <div class="tabs"><button id="tfila">1. Fila de Chamados</button><button id="ttri">2. Triagem e Detalhes IA</button><button id="tres">3. Central de Resolução</button></div>
+</header>
+<main>
+<div id="nb" class="card" style="margin-bottom:12px;border-color:var(--pri)" hidden></div>
+<div id="an" class="card" style="margin-bottom:12px"></div>
+<section id="pfila">
+  <div class="stats"><div><small>Na fila de espera</small><b id="s1">0</b><small>chamados</small></div><div><small>Em atendimento</small><b id="s2">0</b><small>chamados</small></div><div><small>Resolvidos</small><b id="s3">0</b><small>chamados</small></div><div><small>Prioridade alta/crítica</small><b id="s4">0</b><small>em aberto</small></div></div>
+  <div class="bar"><input id="q" placeholder="Busca por ticket ou solicitante..." aria-label="Busca"><select id="fs" aria-label="Filtros"><option value="">Filtros: todos</option><option>TI</option><option>RH</option><option>Financeiro</option></select></div>
+  <button id="mine" type="button" style="margin:0 8px 12px 0">Só os meus atendimentos</button><button id="demoe" type="button" style="margin:0 0 12px">Ver exemplo de atendimento</button>
+  <div id="tb"></div>
+</section>
+<section id="ptri" hidden></section>
+<section id="pres" hidden></section>
+</main>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const SETORES=["TI","RH","Financeiro"];
+const SUBS=[["Access","VPN"],["Access","Senha/Login"],["Hardware","Computador"],["Hardware","Impressora"],["Software","Instalação"],["Rede","Internet/Wi-Fi"],["RH","Folha de pagamento"],["RH","Benefícios"],["Financeiro","Reembolso"],["Financeiro","Nota fiscal"]];
+const PRIO=["baixa","média","alta","crítica"];
+const NEXT={"encaminhado":["Iniciar atendimento","em atendimento"],"em atendimento":["Marcar como resolvido","resolvido"]};
+let list=[],demo=null,demoE=null,uid=null,store=null,shared=false,selId=null,step=0,dd={},nome="",busy=false,me=null,onlyMine=false,seen=null;
+const pk=p=>p.replace("í","i").replace("é","e");
+const save=c=>{if(c.id==="demo")render();else store.upd(c)};
+function mk(tag,txt,cls){const e=document.createElement(tag);if(txt!=null)e.textContent=txt;if(cls)e.className=cls;return e}
+
+function card(c,eq){
+  const d=mk("div",null,"card t"+(c.status==="resolvido"?" res":""));
+  d.append(mk("b","#"+c.num+" · "+c.resumo),mk("small",c.usuario+" · "+c.data+" · status: "+c.status));
+  if(eq)d.appendChild(mk("p",c.descricao,"d"));
+  const tags=mk("div");tags.style.marginTop="8px";
+  [c.categoria+" → "+c.subcategoria,"Setor: "+c.setor,"Prioridade: "+c.prioridade,"Atribuição: "+(c.nivel||"Suporte Nível 1")].concat(c.atendente?["Atendente: "+c.atendente]:[]).forEach((x,i)=>tags.appendChild(mk("span",x,"tag"+(i==2?" "+pk(c.prioridade):""))));
+  d.appendChild(tags);
+  if(c.status==="resolvido"){if(!eq){const m=mk("div","✓ Seu problema foi resolvido","ok");m.style.marginTop="8px";d.appendChild(m)}if(c.solucao)d.appendChild(mk("p","Solução: "+c.solucao,"d"));
+    if(eq&&c.causa)d.appendChild(mk("small","Causa raiz: "+c.causa+" · "+c.conclusao,"d"));
+    if(c.nota)d.appendChild(mk("p","Avaliação: "+"★".repeat(c.nota)+"☆".repeat(5-c.nota),"d"));
+    else if(!eq&&c.id!=="x"){const s=mk("div");s.appendChild(mk("small","Avalie o atendimento: "));for(let i=1;i<=5;i++){const b=mk("button","☆","star");b.setAttribute("aria-label",i+" estrelas");b.onclick=()=>{c.nota=i;store.upd(c)};s.appendChild(b)}d.appendChild(s)}}
+  const h=mk("ul",null,"hist");c.historico.forEach(x=>h.appendChild(mk("li",x.data+" – "+x.acao)));d.appendChild(h);
+  const mineT=!c.atendente||!me||c.atendente===me.nome;
+  if(eq&&c.status==="encaminhado"){const b=mk("button","Assumir chamado");b.style.marginTop="10px";
+    b.onclick=()=>{const n=me?me.nome:"Analista";c.atendente=n;c.status="em atendimento";c.historico.push({acao:"assumido por "+n,data:new Date().toLocaleString("pt-BR")});save(c)};d.appendChild(b)}
+  if(eq&&c.status==="em atendimento"){if(mineT){const b=mk("button","Ir para o encerramento");b.style.marginTop="10px";b.onclick=()=>{selId=c.id;tab("res");render()};d.appendChild(b)}else d.appendChild(mk("small","Em atendimento por "+c.atendente,"d"))}
+  return d;
+}
+function row(c){
+  const r=mk("div",null,"rw");r.onclick=()=>{selId=c.id;tab("tri");render()};
+  const a=mk("div");a.append(mk("b","#"+c.num+" - "+c.resumo),mk("small",c.categoria+" · "+c.subcategoria+" · "+c.status));
+  const u=mk("div",null,"us");const nm=c.usuario.split(" (")[0];
+  u.append(mk("span",nm),mk("i",nm.split(" ").slice(0,2).map(w=>w[0]).join("").toUpperCase(),"av"));
+  r.append(a,mk("span",c.prioridade.toUpperCase(),"pr "+pk(c.prioridade)),u);return r;
+}
+function render(){
+  const mine=list.filter(c=>!shared||c.dono===uid).sort((a,b)=>b.ts-a.ts);
+  const l=$("lc");l.textContent="";
+  if(demo)l.appendChild(card(demo));
+  if(!mine.length&&!demo)l.appendChild(mk("small","Nenhum chamado ainda."));
+  mine.forEach(c=>l.appendChild(card(c)));
+  const lm=me&&me.setor!=="Todos"?list.filter(c=>c.setor===me.setor):list;
+  const n=s=>lm.filter(c=>c.status===s).length;
+  $("s1").textContent=n("encaminhado");$("s2").textContent=n("em atendimento");$("s3").textContent=n("resolvido");
+  $("s4").textContent=lm.filter(c=>c.status!=="resolvido"&&(c.prioridade==="alta"||c.prioridade==="crítica")).length;
+  const all=(demoE?[demoE]:[]).concat(list),q=$("q").value.trim().toLowerCase(),fs=(me&&me.setor!=="Todos")?me.setor:$("fs").value;
+  const f=all.filter(c=>c.status!=="resolvido"&&(!fs||c.setor===fs)&&(!onlyMine||!me||c.atendente===me.nome)&&(!q||(c.resumo+" "+c.usuario+" "+c.num).toLowerCase().includes(q)))
+    .sort((a,b)=>PRIO.indexOf(b.prioridade)-PRIO.indexOf(a.prioridade)||a.ts-b.ts);
+  const tb=$("tb");tb.textContent="";if(!f.length)tb.appendChild(mk("small","Nenhum chamado na fila."));f.forEach(c=>tb.appendChild(row(c)));
+  const sel=all.find(c=>c.id===selId);
+  $("ttri").textContent="2. Triagem e Detalhes IA"+(sel?" #"+sel.num:"");
+  triagem(sel);encerra(sel,all.filter(c=>c.status==="resolvido"));painel();aviso();
+}
+function painel(){
+  const a=$("an");a.textContent="";$("fs").disabled=!!(me&&me.setor!=="Todos");
+  if(me){a.append(mk("b","👤 "+me.nome),mk("small"," · "+(me.setor==="Todos"?"Gestor (todos os setores)":"Equipe de "+me.setor)));
+    const o=mk("button","Trocar");o.style.cssText="margin:0 0 0 10px;padding:4px 10px;font-size:.8rem";
+    o.onclick=()=>{me=null;try{localStorage.removeItem("analista")}catch(e){}render()};a.appendChild(o);return}
+  a.appendChild(mk("b","Quem está atendendo? Entre para ver a fila do seu setor."));
+  const r=mk("div",null,"bar"),n=mk("input"),s=mk("select");r.style.marginTop="10px";n.placeholder="Seu nome";n.setAttribute("aria-label","Seu nome");
+  ["TI","RH","Financeiro","Todos"].forEach(x=>s.appendChild(mk("option",x)));r.append(n,s);
+  const go=mk("button","Entrar na fila");
+  go.onclick=()=>{if(!n.value.trim()){n.focus();return}me={nome:n.value.trim(),setor:s.value};try{localStorage.setItem("analista",JSON.stringify(me))}catch(e){}render()};
+  a.append(r,go);
+}
+function aviso(){
+  if(seen===null)return;
+  const nb=$("nb");
+  list.forEach(c=>{if(!seen.has(c.id)){seen.add(c.id);
+    if(c.status==="encaminhado"&&me&&(me.setor==="Todos"||me.setor===c.setor)){nb.hidden=false;nb.textContent="";nb.append(mk("b","🔔 Novo chamado #"+c.num+" para "+c.setor+": "+c.resumo));
+      const x=mk("button","Ver");x.style.cssText="margin:0 0 0 10px;padding:4px 12px";x.onclick=()=>{selId=c.id;nb.hidden=true;tab("tri");render()};nb.appendChild(x)}}});
+}
+function triagem(c){
+  const p=$("ptri");p.textContent="";
+  if(!c){p.appendChild(mk("small","Selecione um chamado na fila para ver a triagem feita pelo agente."));return}
+  const g=mk("div",null,"g2"),L=mk("div"),R=mk("div",null,"card");
+  L.appendChild(card(c,true));
+  const ia=mk("div",null,"ia");ia.appendChild(mk("b","✨ Diagnóstico de IA"));
+  if(c.diag){ia.appendChild(mk("p",c.diag.causa,"d"));ia.appendChild(mk("small","Resolução sugerida: "+c.diag.acao))}
+  else{ia.appendChild(mk("p","Peça à IA uma provável causa e uma sugestão de resolução com base no relato do cliente.","d"));
+    const b=mk("button","Gerar diagnóstico com IA");
+    b.onclick=async()=>{b.disabled=true;b.textContent="Analisando…";
+      try{const s=window.claude&&await claude.use("sample");if(!s)throw 0;
+        const r=await s.json("Você apoia analistas de Help Desk. Chamado: "+c.resumo+". Relato: "+c.descricao+". Classificação: "+c.categoria+" → "+c.subcategoria+". Dê uma provável causa e uma ação sugerida, curtas, sem inventar dados. Responda somente JSON: {\"causa\":texto,\"acao\":texto}");
+        c.diag={causa:String(r.causa).slice(0,300),acao:String(r.acao).slice(0,300)};save(c)}
+      catch(e){b.disabled=false;b.textContent="Não foi possível. Tentar de novo"}};ia.appendChild(b)}
+  L.appendChild(ia);
+  const nt=mk("div",null,"card");nt.style.marginTop="12px";nt.appendChild(mk("b","📝 Notas internas da equipe"));
+  const ta=mk("textarea");ta.rows=3;ta.value=c.notas||"";ta.placeholder="Observação interna que só a equipe vê…";ta.style.marginTop="8px";
+  const sb=mk("button","Salvar nota");sb.style.marginTop="8px";sb.onclick=()=>{c.notas=ta.value.trim();save(c)};
+  nt.append(ta,sb);L.appendChild(nt);
+  R.appendChild(mk("b","Histórico da conversa de triagem"));R.appendChild(mk("small"," · capturado automaticamente do chat do cliente"));
+  const cv=mk("div",null,"cv");cv.style.marginTop="10px";
+  (c.conversa&&c.conversa.length?c.conversa:[{w:"bot",t:"Sem conversa registrada para este chamado."}]).forEach(x=>cv.appendChild(mk("div",x.t,"m "+x.w)));
+  R.appendChild(cv);g.append(L,R);p.appendChild(g);
+}
+function encerra(c,rs){
+  const p=$("pres");p.textContent="";
+  const hd=mk("div",null,"card");hd.append(mk("b","Encerramento e ações da resolução"));
+  if(c){const bk=mk("button","← Voltar ao detalhamento");bk.style.cssText="float:right;margin:0";bk.onclick=()=>tab("tri");hd.appendChild(bk)}
+  p.appendChild(hd);
+  if(!c||c.status==="resolvido"||c.status==="encaminhado"){
+    hd.appendChild(mk("p",!c?"Selecione um chamado na fila e inicie o atendimento para encerrá-lo aqui.":c.status==="resolvido"?"Este chamado já foi encerrado.":"Inicie o atendimento do chamado #"+c.num+" na aba de triagem antes de encerrar.","d"));
+  }else{
+    const nm=c.usuario,f=mk("div",null,"fm");
+    const MAC={"— escolher resposta pronta —":"","Acesso redefinido (sucesso)":"Olá, "+nm+"! Redefinimos o seu acesso. Tente entrar novamente e, se persistir, abra um novo chamado.","Permissão concedida":"Olá, "+nm+"! A permissão solicitada foi concedida. Tente executar a ação novamente.","Orientado ao autoatendimento":"Olá, "+nm+"! Orientamos o uso do portal de autoatendimento para resolver essa solicitação.","Problema não reproduzido":"Olá, "+nm+"! Não conseguimos reproduzir o problema. Se voltar a acontecer, abra um novo chamado com mais detalhes."};
+    const sl=o=>{const s=mk("select");o.forEach(x=>s.appendChild(mk("option",x)));return s};
+    const lab=(t,el)=>{f.appendChild(mk("label",t));f.appendChild(el)};
+    const mc=sl(Object.keys(MAC)),msg=mk("textarea");msg.rows=4;msg.placeholder="Mensagem final para o cliente";
+    const cs=sl(["Gestão de Identidade e Acessos","Rede / VPN","Hardware","Software","Permissões","Outros"]),st=sl(["Resolvido com sucesso","Resolvido com contorno"]);
+    const kb=mk("input");kb.type="checkbox";kb.style.width="auto";
+    const kl=mk("label");kl.style.cssText="display:flex;gap:8px;align-items:center;margin-top:12px";kl.append(kb,document.createTextNode("Marcar para a base de conhecimento"));
+    lab("Carregar resposta pronta",mc);lab("Mensagem final ao cliente",msg);lab("Categoria da causa raiz",cs);lab("Status de conclusão",st);f.appendChild(kl);
+    const pm=mk("small","A mensagem final aparece aqui.");
+    mc.onchange=()=>{msg.value=MAC[mc.value];pm.textContent=msg.value||"A mensagem final aparece aqui."};
+    msg.oninput=()=>{pm.textContent=msg.value||"A mensagem final aparece aqui."};
+    const go=mk("button","Concluir chamado e notificar o cliente");go.style.marginTop="14px";
+    go.onclick=()=>{const t=msg.value.trim();if(!t){msg.focus();return}
+      c.status="resolvido";c.solucao=t;c.causa=cs.value;c.conclusao=st.value;c.kb=kb.checked;
+      c.historico.push({acao:"resolvido ("+st.value.toLowerCase()+")",data:new Date().toLocaleString("pt-BR")});save(c);tab("fila")};
+    f.appendChild(go);
+    const pv=mk("div",null,"card");pv.append(mk("b","Prévia da notificação ao cliente"),mk("p","Seu chamado #"+c.num+" foi resolvido","d"),pm);
+    const es=mk("div",null,"card");es.style.marginTop="12px";es.appendChild(mk("b","Reatribuir / escalonar"));
+    const ns=sl(["Suporte Nível 1","Suporte Nível 2","Suporte Nível 3"]);ns.value=c.nivel||"Suporte Nível 1";ns.style.margin="8px 0";
+    const tb=mk("button","Confirmar transferência");tb.onclick=()=>{c.nivel=ns.value;c.historico.push({acao:"transferido para "+ns.value,data:new Date().toLocaleString("pt-BR")});save(c)};
+    es.append(ns,tb);
+    const g=mk("div",null,"g2"),lf=mk("div",null,"card"),rt=mk("div");lf.appendChild(f);rt.append(pv,es);g.append(lf,rt);g.style.marginTop="12px";p.appendChild(g);
+  }
+  p.appendChild(mk("h2","Chamados resolvidos"));
+  if(!rs.length)p.appendChild(mk("small","Nenhuma resolução ainda."));rs.forEach(x=>p.appendChild(card(x,true)));
+}
+function tab(t){["fila","tri","res"].forEach(k=>{$("p"+k).hidden=k!==t;$("t"+k).className=k===t?"on":""})}
+["fila","tri","res"].forEach(k=>$("t"+k).onclick=()=>tab(k));
+function route(){const eq=location.hash==="#equipe";$("vc").hidden=eq;$("ve").hidden=!eq}
+addEventListener("hashchange",route);route();tab("fila");
+$("fs").onchange=$("q").oninput=render;
+$("mine").onclick=()=>{onlyMine=!onlyMine;$("mine").textContent=onlyMine?"Mostrar todos":"Só os meus atendimentos";render()};
+
+/* chat */
+function say(t,w){(dd.conv=dd.conv||[]).push({w,t});const m=mk("div",t,"m "+w),b=$("msgs");b.appendChild(m);b.scrollTop=b.scrollHeight}
+function opts(a,fn){const o=$("opts");o.textContent="";a.forEach(t=>{const b=mk("button",t,"chip");b.onclick=()=>fn?fn(t):input(t);o.appendChild(b)})}
+function begin(){step=1;dd={};$("msgs").textContent="";
+  say("Olá, "+nome+"! Sou o assistente virtual do Help Desk. Como posso te ajudar hoje? Selecione uma das opções abaixo ou digite seu problema:","bot");
+  opts(["Redefinir Senha / Acesso","Erro ou Lentidão no Sistema"])}
+function input(t){
+  t=t.trim();if(!t||busy||step<1||step===4)return;
+  say(t,"me");$("txt").value="";$("opts").textContent="";
+  if(step===1&&t==="Redefinir Senha / Acesso"){dd.problema=t;step=5;setTimeout(()=>{say("Sem problemas! Em qual conta ou sistema você precisa redefinir o acesso?","bot");opts(["E-mail / Microsoft 365","VPN / Rede Corporativa","Login do Computador"])},400)}
+  else if(step===5){dd.conta=t;step=6;setTimeout(()=>{say("Para redefinições de "+t+", você mesmo pode alterar de forma segura pelo portal de autoatendimento. Deseja ir para o portal ou abrir um chamado direto com a equipe?","bot");opts(["Ir para o Portal de Senhas","Não consegui, abrir chamado"])},400)}
+  else if(step===6&&t==="Ir para o Portal de Senhas"){setTimeout(()=>{say("O link do portal depende da configuração da sua empresa e não está ligado a esta demonstração. Se não conseguir redefinir por lá, posso abrir o chamado agora.","bot");opts(["Não consegui, abrir chamado"])},400)}
+  else if(step===6){dd.problema="Redefinição de acesso: "+dd.conta+(t==="Não consegui, abrir chamado"?"":" ("+t+")");dd.sistema=dd.conta;dd.impacto="Não informado";step=4;finish()}
+  else if(step===1){dd.problema=t;step=2;setTimeout(()=>{say("Entendido. Para direcionarmos para a equipe certa, qual sistema está apresentando falha?","bot");opts(["ERP / Financeiro","Email / Teams","CRM / Atendimento"])},400)}
+  else if(step===2){dd.sistema=t;step=3;setTimeout(()=>{say("Obrigado! Esse problema está impedindo você ou sua equipe de trabalhar neste momento?","bot");opts(["🔴 Sim, sistema fora do ar","🟡 Não, consigo usar com limitações"])},400)}
+  else{dd.impacto=t;step=4;finish()}
+}
+async function finish(){
+  busy=true;$("opts").textContent="";say("Registrando e classificando o seu chamado…","bot");
+  try{
+    let r,auto=false;
+    try{
+    const sample=window.claude&&await claude.use("sample");
+    if(!sample)throw new Error("IA indisponível nesta visualização");
+    const subs=SUBS.map((s,i)=>i+": "+s[0]+" → "+s[1]).join("\n");
+    r=await sample.json("Você é um agente de triagem de Help Desk. Apenas classifique o chamado, sem tentar resolver.\nSubcategorias:\n"+subs+"\nSetores: "+SETORES.join(", ")+"\nPrioridades: "+PRIO.join(", ")+"\nProblema relatado: "+dd.problema+"\nSistema com falha: "+dd.sistema+"\nImpacto: "+dd.impacto+"\nSe o sistema está fora do ar, use prioridade alta ou crítica.\nResponda somente JSON: {\"subcategoria_id\":número,\"setor\":texto,\"prioridade\":texto,\"resumo\":título curto de até 8 palavras}");
+    const nz=s=>String(s).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    r.setor=SETORES.find(x=>nz(x)===nz(r.setor));
+    r.prioridade=PRIO.find(x=>nz(x)===nz(r.prioridade));
+    if(!SUBS[Number(r.subcategoria_id)]||!r.setor||!r.prioridade)throw new Error("Resposta inesperada da IA");
+    }catch(e){auto=true;console.error(e);r={subcategoria_id:null,setor:"TI",prioridade:String(dd.impacto).includes("fora do ar")?"alta":"média",resumo:dd.problema}}
+    const sc=SUBS[Number(r.subcategoria_id)]||["Não classificado","Triagem manual"];
+    const now=new Date().toLocaleString("pt-BR");
+    const c={id:"c"+Date.now().toString(36),num:list.length+1,ts:Date.now(),dono:uid||"anon",usuario:nome,categoria:sc[0],subcategoria:sc[1],setor:r.setor,prioridade:r.prioridade,resumo:String(r.resumo||dd.problema).slice(0,80),descricao:dd.problema+" | Sistema: "+dd.sistema+" | Impacto: "+dd.impacto,nivel:["alta","crítica"].includes(r.prioridade)?"Suporte Nível 2":"Suporte Nível 1",conversa:(dd.conv||[]).filter(x=>!x.t.startsWith("Registrando")),status:"encaminhado",data:now,historico:[{acao:"criado",data:now},{acao:"encaminhado para a equipe de "+r.setor,data:now}].concat(auto?[{acao:"classificação automática indisponível: triagem manual",data:now}]:[])};
+    try{await store.add(c)}catch(err){throw new Error("Falha ao gravar: "+(err&&(err.message||err.code)||err))}
+    say("Sem problemas! Registrei a solicitação para a equipe de "+r.setor+".\n\n🎫 Chamado: #"+c.num+"\n📂 Categoria: "+sc[0]+" → "+sc[1]+"\n⚡ Prioridade: "+r.prioridade+"\n👤 Atribuição: "+c.nivel+"\n\nUm analista entrará em contato em breve.","bot");
+    opts(["Acompanhar no Help Desk","Novo atendimento"],t=>t==="Novo atendimento"?begin():$("mc").scrollIntoView({behavior:"smooth"}));
+  }catch(e){console.error(e);say("Não consegui registrar o chamado agora. Tente novamente em instantes."+"\n(Motivo técnico: "+String(e&&(e.message||e.code)||e).slice(0,160)+")","bot");opts(["Tentar novamente"],finish)}
+  finally{busy=false}
+}
+$("start").onclick=()=>{nome=$("nome").value.trim();if(!nome){$("nome").focus();return}$("welcome").hidden=true;$("chatbox").hidden=false;begin()};
+$("send").onclick=()=>input($("txt").value);
+$("txt").onkeydown=e=>{if(e.key==="Enter")input($("txt").value)};
+
+/* exemplos */
+const ex=(id,status,hist)=>({id,num:"exemplo",ts:Date.now(),usuario:"Maria Souza",categoria:"Access",subcategoria:"VPN",setor:"TI",prioridade:"alta",resumo:"Não consigo conectar na VPN",descricao:"Não consigo conectar na VPN desde cedo | Sistema: Email / Teams | Impacto: sistema fora do ar",nivel:"Suporte Nível 1",conversa:[{w:"bot",t:"Olá! Sou o assistente virtual do Help Desk. Como posso te ajudar hoje?"},{w:"me",t:"Não consigo conectar na VPN desde cedo"},{w:"bot",t:"Entendido. Qual sistema está apresentando falha?"},{w:"me",t:"Email / Teams"},{w:"bot",t:"Esse problema está impedindo você de trabalhar neste momento?"},{w:"me",t:"🔴 Sim, sistema fora do ar"}],status,data:"04/11/2026 09:10",historico:hist});
+$("demo").onclick=()=>{
+  if(demo){demo=null;$("demo").textContent="Ver exemplo de chamado resolvido"}
+  else{demo=ex("x","resolvido",[{acao:"criado",data:"04/11/2026 09:10"},{acao:"encaminhado para a equipe de TI",data:"04/11/2026 09:10"},{acao:"em atendimento",data:"04/11/2026 09:25"},{acao:"resolvido",data:"04/11/2026 10:02"}]);demo.solucao="Credenciais da VPN renovadas e acesso testado.";$("demo").textContent="Ocultar exemplo"}
+  render()};
+$("demoe").onclick=()=>{
+  if(demoE){demoE=null;$("demoe").textContent="Ver exemplo de atendimento"}
+  else{const n=new Date().toLocaleString("pt-BR");demoE=ex("demo","encaminhado",[{acao:"criado",data:n},{acao:"encaminhado para a equipe de TI",data:n}]);demoE.data=n;$("demoe").textContent="Ocultar exemplo"}
+  render()};
+
+/* dados */
+async function init(){
+  try{me=JSON.parse(localStorage.getItem("analista")||"null")}catch(e){}
+  let loc=[];try{loc=JSON.parse(localStorage.getItem("chamados")||"[]")}catch(e){}
+  const sv=()=>{try{localStorage.setItem("chamados",JSON.stringify(loc))}catch(e){}};
+  store={cb:a=>{if(seen===null)seen=new Set(a.map(c=>c.id));list=a;render()},sub(cb){this.cb=cb;cb(loc)},add(c){loc.push(c);sv();this.cb(loc)},upd(c){sv();this.cb(loc)}};
+  store.cb(loc);
+  try{
+    if(!window.claude)return;
+    const u=await claude.use("user");if(u)uid=await u.id();
+    const db=await claude.use("db");if(!db)return;
+    const col=db.collection("chamados");shared=true;
+    store={sub(cb){col.onSnapshot(s=>cb(s.docs.map(d=>d.data())),()=>{})},add(c){return col.doc(c.id).set(c)},upd(c){return col.doc(c.id).set(c)}};
+    store.sub(a=>{if(seen===null)seen=new Set(a.map(c=>c.id));list=a;render()});
+  }catch(e){}
+  if(!shared)store.sub(a=>{if(seen===null)seen=new Set(a.map(c=>c.id));list=a;render()});
+}
+/* Transcrição de voz */
+
+const btnVoice = document.getElementById("voice");
+
+if (
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition
+) {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "pt-BR";
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  let gravando = false;
+
+  btnVoice.addEventListener("click", () => {
+
+    if (!gravando) {
+      recognition.start();
+      gravando = true;
+      btnVoice.textContent = "🔴";
+    } else {
+      recognition.stop();
+    }
+  });
+
+  recognition.onresult = (event) => {
+
+    const texto =
+      event.results[0][0].transcript;
+
+    document.getElementById("txt").value = texto;
+  };
+
+  recognition.onend = () => {
+    gravando = false;
+    btnVoice.textContent = "🎤";
+  };
+
+  recognition.onerror = () => {
+    gravando = false;
+    btnVoice.textContent = "🎤";
+  };
+
+} else {
+
+  btnVoice.disabled = true;
+  btnVoice.title =
+    "Reconhecimento de voz não suportado";
+
+}
+init();
+</script>
+</body>
+</html>
