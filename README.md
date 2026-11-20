@@ -22,9 +22,9 @@ O objetivo é reduzir o trabalho manual de classificação de chamados e dar ao 
 |------|-------|
 | Julia Cristina| Scrum Master |
 | Maria Mota | Product Owner |
-| Daniel | Desenvolvedor Back End |
-| Lohan | Desenvolvedor Front End |
-| Gisele| Desenvolvedora UX/UC |
+| Daniel Oliveira | Desenvolvedor Back End |
+| Lohan Oliveira| Desenvolvedor Front End |
+| Gisele Santos| Desenvolvedora UX/UC |
 
 **Professor(a):** Raulison Rezende
 **Instituição / Turma:** Universidade São Judas Tadeu - Campus Paulista 
