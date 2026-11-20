@@ -3,7 +3,7 @@
 Protótipo de um sistema de **Help Desk com triagem assistida por IA**, desenvolvido como projeto em grupo da disciplina de **Engenharia de Software**.
 
 > **Versão atual:** 5 (protótipo evolutivo)
-> **Demonstração online:** https://SEU-USUARIO.github.io/help-desk/
+> **Demonstração online:** https://mariamotaaraujo1-star.github.io/SpaceX-Helpdesk/
 
 ---
 
