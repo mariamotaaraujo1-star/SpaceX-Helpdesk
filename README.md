@@ -1,4 +1,4 @@
-# 🎧 Help Desk – Protótipo Evolutivo
+# 🎧 DeskOps.AI – Protótipo Evolutivo
 
 Protótipo de um sistema de **Help Desk com triagem assistida por IA**, desenvolvido como projeto em grupo da disciplina de **Engenharia de Software**.
 
@@ -16,17 +16,17 @@ O sistema reúne em um único protótipo web duas visões do atendimento de TI e
 
 O objetivo é reduzir o trabalho manual de classificação de chamados e dar ao analista um fluxo claro: **fila → triagem → resolução**.
 
-## 👥 Integrantes
+## 👥 Integrantes do Squad SpaceX
 
 | Nome | Papel |
 |------|-------|
 | Julia Cristina| Scrum Master |
-| Maria Mota | Product Owner |
-| Daniel Oliveira | Desenvolvedor Back End |
-| Lohan Oliveira| Desenvolvedor Front End |
-| Gisele Santos| Desenvolvedora UX/UC |
+| Maria das Dores Araujo Mota | Product Owner |
+| Daniel Oliveira de Sousa | Desenvolvedor Back End |
+| Lohan Oliveira Santos da Costa | Desenvolvedor Front End |
+| Gisele Santos Silva| Desenvolvedora UX/UC |
 
-**Professor(a):** Raulison Rezende
+**Professor(a):** Raulison Resende
 **Instituição / Turma:** Universidade São Judas Tadeu - Campus Paulista 
 
 ---
