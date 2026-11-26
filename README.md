@@ -20,7 +20,7 @@ O objetivo é reduzir o trabalho manual de classificação de chamados e dar ao 
 
 | Nome | Papel |
 |------|-------|
-| Julia Cristina| Scrum Master |
+| Julia Cristina dos Santos Silva| Scrum Master |
 | Maria das Dores Araujo Mota | Product Owner |
 | Daniel Oliveira de Sousa | Desenvolvedor Back End |
 | Lohan Oliveira Santos da Costa | Desenvolvedor Front End |
