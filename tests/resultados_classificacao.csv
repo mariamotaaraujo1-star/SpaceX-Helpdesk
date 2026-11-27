@@ -1,0 +1,51 @@
+id;setor_obtido;prioridade_obtida;setor_correto;prioridade_correta;ambos_corretos;observacoes
+C01;TI;baixa;SIM;SIM;SIM;
+C02;TI;média;SIM;SIM;SIM;
+C03;TI;alta;SIM;SIM;SIM;
+C04;TI;crítica;SIM;SIM;SIM;
+C05;TI;baixa;SIM;SIM;SIM;
+C06;TI;média;SIM;SIM;SIM;
+C07;TI;alta;SIM;SIM;SIM;
+C08;TI;crítica;SIM;SIM;SIM;
+C09;RH;baixa;SIM;SIM;SIM;
+C10;RH;média;SIM;SIM;SIM;
+C11;RH;alta;SIM;SIM;SIM;
+C12;RH;alta;SIM;NÃO;NÃO;Prioridade esperada: crítica; retornada: alta.
+C13;RH;baixa;SIM;SIM;SIM;
+C14;RH;média;SIM;SIM;SIM;
+C15;RH;alta;SIM;SIM;SIM;Roteado para Holerite/Folha de pagamento, não para Ponto.
+C16;TI;N/A;NÃO;NÃO;NÃO;Roteado para TI → Triagem manual (40%); prioridade não calculada.
+C17;Financeiro e Fiscal;baixa;SIM;SIM;SIM;
+C18;Financeiro e Fiscal;média;SIM;SIM;SIM;
+C19;Financeiro e Fiscal;alta;SIM;SIM;SIM;
+C20;Financeiro e Fiscal;crítica;SIM;SIM;SIM;
+C21;Financeiro e Fiscal;baixa;SIM;SIM;SIM;
+C22;Financeiro e Fiscal;média;SIM;SIM;SIM;
+C23;Financeiro e Fiscal;alta;SIM;SIM;SIM;
+C24;TI;crítica;NÃO;SIM;NÃO;Roteado para TI (Sistema fiscal/SPED), não para Financeiro e Fiscal.
+C25;Administrativo;baixa;SIM;SIM;SIM;
+C26;Administrativo;média;SIM;SIM;SIM;
+C27;Administrativo;alta;SIM;SIM;SIM;
+C28;Administrativo;alta;SIM;NÃO;NÃO;Prioridade esperada: crítica; retornada: alta.
+C29;Administrativo;baixa;SIM;SIM;SIM;
+C30;Administrativo;média;SIM;SIM;SIM;
+C31;Administrativo;alta;SIM;SIM;SIM;
+C32;Administrativo;crítica;SIM;SIM;SIM;
+C33;Jurídico;baixa;SIM;SIM;SIM;
+C34;Jurídico;média;SIM;SIM;SIM;
+C35;Jurídico;alta;SIM;SIM;SIM;
+C36;Jurídico;crítica;SIM;SIM;SIM;
+C37;Jurídico;baixa;SIM;SIM;SIM;
+C38;Jurídico;média;SIM;SIM;SIM;
+C39;Jurídico;alta;SIM;SIM;SIM;
+C40;Jurídico;crítica;SIM;SIM;SIM;
+C41;Compras;baixa;SIM;SIM;SIM;
+C42;Compras;média;SIM;SIM;SIM;
+C43;Compras;alta;SIM;SIM;SIM;
+C44;Compras;crítica;SIM;SIM;SIM;
+C45;Compras;baixa;SIM;SIM;SIM;
+C46;Compras;média;SIM;SIM;SIM;
+C47;Compras;alta;SIM;SIM;SIM;
+C48;TI;crítica;NÃO;SIM;NÃO;Roteado para TI; esperado: Compras.
+
+
