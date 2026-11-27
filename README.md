@@ -238,30 +238,3 @@ Dicas para testar:
 
 Projeto acadêmico, desenvolvido para fins educacionais.
 
-## Evidências de testes
-
-A validação do protótipo foi feita manualmente com casos preparados pelo grupo, sem participação de usuários reais.
-
-### Classificação de chamados
-
-Foram executados 48 casos de teste para verificar o setor e a prioridade atribuídos pelo motor local de regras.
-
-- Setor correto: 45 de 48 casos (93,8%)
-- Prioridade correta: 45 de 48 casos (93,8%)
-- Setor e prioridade corretos: 43 de 48 casos (89,6%)
-
-### Base de conhecimento Nível 0
-
-Em 16 casos preparados com artigo correspondente, o sistema sugeriu o artigo esperado em 16 de 16 testes.
-
-### Arquivos de evidência
-
-- [Metodologia dos testes](tests/metodologia_testes.md)
-- [Casos de classificação](tests/casos_classificacao.csv)
-- [Resultados da classificação](tests/resultados_classificacao.csv)
-- [Casos de artigos Nível 0](tests/casos_artigos_nivel0.csv)
-- [Resultados dos artigos Nível 0](tests/resultados_artigos_nivel0.csv)
-
-### Limitações
-
-Os casos e o gabarito foram definidos pelo grupo. Os resultados demonstram o comportamento do protótipo no conjunto avaliado e não representam uma avaliação com usuários reais.
