@@ -1,6 +1,6 @@
 # 🎧 DeskOps.AI – Protótipo Evolutivo
 
-Protótipo de um sistema de **Help Desk com triagem assistida por IA**, desenvolvido pelo Squad Space X, como projeto em grupo da disciplina de **Engenharia de Software**.
+Protótipo de um sistema de **Help Desk com triagem assistida por IA e um agente conversacional SpaceX**, desenvolvido como projeto em grupo da disciplina de **Engenharia de Software**.
 
 > **Versão atual:** 5 (protótipo evolutivo)
 > **Demonstração online:** https://mariamotaaraujo1-star.github.io/DeskOps.AI/
