@@ -1,6 +1,7 @@
 # 🎧 DeskOps.AI – Protótipo Evolutivo
 
-Protótipo de um sistema de **Help Desk com triagem assistida por IA**, desenvolvido pelo Squad Space X, como projeto em grupo da disciplina de **Engenharia de Software**.
+Protótipo de Help Desk B2B com triagem conversacional, motor local de regras e IA generativa opcional, desenvolvido como projeto em grupo da disciplina de **Engenharia de Software**.
+O SpaceX Assistente é o agente conversacional do DeskOps.AI.
 
 > **Versão atual:** 5 (protótipo evolutivo)
 > **Demonstração online:** https://mariamotaaraujo1-star.github.io/DeskOps.AI/
@@ -16,7 +17,7 @@ O sistema reúne em um único protótipo web duas visões do atendimento de TI e
 
 O objetivo é reduzir o trabalho manual de classificação de chamados e dar ao analista um fluxo claro: **fila → triagem → resolução**.
 
-## 👥 Integrantes do Squad SpaceX
+## 👥 Integrantes da equipe
 
 | Nome | Papel |
 |------|-------|
@@ -42,7 +43,7 @@ O objetivo é reduzir o trabalho manual de classificação de chamados e dar ao 
 - Lista **"Meus chamados"** com histórico de cada chamado e **avaliação do atendimento (1 a 5 estrelas)** após a resolução.
 
 ### Painel da equipe (analista)
-- **Login simples por nome e setor** (TI, RH, Financeiro ou Todos/Gestor); a fila é filtrada pelo setor do analista.
+- **Login simples por nome e setor** (TI, RH, Financeiro e Fiscal, Administrativo, Jurídico e Compras ou Todos/Gestor); a fila é filtrada pelo setor do analista.
 - **1. Fila de Chamados:** indicadores (na fila, em atendimento, resolvidos, prioridade alta/crítica), busca por ticket ou solicitante, filtro por setor e opção "só os meus atendimentos".
 - **2. Triagem e Detalhes IA:** detalhes do chamado, conversa capturada do chat, **diagnóstico sugerido por IA** (provável causa e ação), notas internas da equipe e botão **Assumir chamado**.
 - **3. Central de Resolução:** respostas prontas, mensagem final ao cliente com prévia, categoria da causa raiz, status de conclusão, marcação para **base de conhecimento** e **reatribuição/escalonamento** entre Suporte Nível 1, 2 e 3.
@@ -50,7 +51,7 @@ O objetivo é reduzir o trabalho manual de classificação de chamados e dar ao 
 - Histórico (linha do tempo) de cada ação realizada no chamado.
 
 ### Classificação inteligente
-Ao finalizar a conversa, o chamado é classificado automaticamente (subcategoria, setor, prioridade e resumo). Se a IA estiver indisponível, o sistema aplica uma **classificação de contingência** (setor TI, prioridade conforme o impacto informado) e registra no histórico que a triagem deve ser manual.
+Ao finalizar a conversa, o motor local de regras classifica automaticamente o chamado por subcategoria, setor, prioridade e resumo. A classificação usa palavras-chave, cenários guiados e a resposta de impacto informada pelo colaborador. A IA generativa é opcional; quando indisponível, o fluxo de abertura continua funcionando e pode sinalizar triagem manual em casos sem regra correspondente.
 
 ---
 
@@ -179,9 +180,7 @@ flowchart TD
 ## ▶️ Como executar
 
 1. Baixe ou clone o repositório:
-   ```bash
-   git clone https://github.com/SEU-USUARIO/help-desk.git
-   ```
+   git clone https://github.com/mariamotaaraujo1-star/DeskOps.AI.git
 2. Abra o arquivo `index.html` em qualquer navegador moderno (não precisa instalar nada).
 3. **Tela do cliente:** abre por padrão.
    **Tela da equipe:** clique em "Sou da equipe" ou acesse `index.html#equipe`.
@@ -204,7 +203,7 @@ Dicas para testar:
 ## ⚠️ Limitações conhecidas do protótipo
 
 - **Sem back-end:** os chamados ficam salvos no `localStorage` do navegador, então não são compartilhados entre dispositivos nem entre usuários diferentes.
-- Os recursos de **IA (classificação e diagnóstico)** dependem do ambiente em que o protótipo foi criado. Fora dele (como no GitHub Pages), o sistema usa a classificação de contingência e o botão de diagnóstico indica indisponibilidade.
+- O motor local de regras funciona no GitHub Pages. A IA generativa e o diagnóstico dependem do ambiente que a disponibiliza; quando não houver regra correspondente, o sistema pode sinalizar triagem manual.
 - O **login do analista** é apenas demonstrativo (não há autenticação real).
 - O link do **portal de autoatendimento de senhas** não está integrado.
 - A **entrada por voz** funciona melhor em navegadores baseados em Chromium (Chrome, Edge).
