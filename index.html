@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-<title>SpaceX Help Desk</title>
+<title>DeskOps Help Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -346,13 +346,13 @@ button,.chip,.btn,.iconbtn{touch-action:manipulation}
       <section class="card chat" aria-label="Chat de atendimento">
         <div class="chathead">
           <div class="logo round">🚀</div>
-          <div class="sp"><b>SpaceX Assistente</b><span class="online">Online · triagem &lt; 2 s</span></div>
+          <div class="sp"><b>DeskOps Assistente</b><span class="online">Online · triagem &lt; 2 s</span></div>
           <button class="btn ghost sm ttsbtn" id="ttsBtn" type="button" hidden aria-pressed="false" aria-keyshortcuts="Alt+L" title="Ler as respostas do assistente em voz alta (Alt+L)" aria-label="Ler as respostas em voz alta"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg><span class="lbl"> Ler respostas</span></button>
           <button class="btn ghost sm" id="restart" hidden title="Começar uma nova conversa" aria-label="Novo atendimento">↺<span class="lbl"> Novo atendimento</span></button>
         </div>
         <div id="welcome" class="welcome">
           <div class="logo round">🚀</div>
-          <h2>Olá, seja bem-vindo ao SpaceX</h2>
+          <h2>Olá, seja bem-vindo ao DeskOps Assistente</h2>
           <p>Canal único de atendimento de <b>todos os setores</b>: TI, RH, Financeiro e Fiscal, Administrativo, Jurídico e Compras. Conte o que precisa e a nossa IA direciona para a equipe certa, com a prioridade certa.</p>
           <div id="startForm" class="sform">
             <div><label class="f" for="nome" style="margin-top:0">Seu nome</label><input id="nome" placeholder="Ex.: Maria Souza" autocomplete="name" required></div>
@@ -723,9 +723,9 @@ S({id:"ti-perif",setor:"TI",l:"🖱️ Monitor, teclado ou mouse",cat:"Hardware"
 S({id:"ti-seguranca",setor:"TI",l:"🛡️ Vírus ou e-mail suspeito (phishing)",cat:"Segurança da Informação",sub:"Incidente de segurança",
  q:[["O que aconteceu?",["Recebi um e-mail suspeito",["Cliquei em um link suspeito","crítica"],["Digitei minha senha em um site estranho","crítica"],"O antivírus mostrou um alerta"]],
     ["Você abriu algum anexo ou link?",["Não abri nada",["Abri o anexo","crítica"],["Cliquei no link","alta"]]]],
- kb:"k19",ev:[["📎 Print do e-mail suspeito","file","email-suspeito.png"],["📝 Remetente do e-mail","q",["Qual o remetente do e-mail?",["financeiro@spacex-pagamentos.com","suporte@microsoft-seguranca.net"]]]],
+ kb:"k19",ev:[["📎 Print do e-mail suspeito","file","email-suspeito.png"],["📝 Remetente do e-mail","q",["Qual o remetente do e-mail?",["financeiro@deskops-pagamentos.com","suporte@microsoft-seguranca.net"]]]],
  an:["Não clique em mais nada. Pode me encaminhar o e-mail suspeito como anexo?","Qual o remetente do e-mail?","Troquei a sua senha, encerrei as sessões abertas e a varredura não encontrou ameaças. Pode entrar com a senha nova?"],
- info:["O remetente é financeiro@spacex-pagamentos.com","Cliquei no link às 9h30"],persist:"o alerta do antivírus continua aparecendo",urg:"Outras pessoas da área receberam o mesmo e-mail",extra:"O e-mail pedia para atualizar dados bancários"});
+ info:["O remetente é financeiro@deskops-pagamentos.com","Cliquei no link às 9h30"],persist:"o alerta do antivírus continua aparecendo",urg:"Outras pessoas da área receberam o mesmo e-mail",extra:"O e-mail pedia para atualizar dados bancários"});
 /* ---------- RH ---------- */
 S({id:"rh-holerite",setor:"RH",l:"💵 Holerite ou diferença no salário",cat:"Departamento Pessoal",sub:"Folha de pagamento",subs:["Folha / Ponto"],
  q:[["O que aconteceu com o seu pagamento?",["Não encontro o holerite","O valor veio menor que o esperado","Desconto que não reconheço","Hora extra não foi paga"]],
@@ -1026,7 +1026,7 @@ function route(){const v=viewNow==="equipe"?"e":viewNow==="gestor"?"g":"c";
   $("vc").hidden=v!=="c";$("ve").hidden=v!=="e";$("vg").hidden=v!=="g";
   $("r-cliente").className=v==="c"?"on":"";$("r-equipe").className=v==="e"?"on":"";$("r-gestor").className=v==="g"?"on":"";
   const b=$("brand");b.textContent="";
-  if(v==="c")b.append(h("div",{class:"logo round"},"🚀"),h("div",{class:"txt"},h("b",null,"SpaceX"),h("small",null,"Help Desk B2B")));
+  if(v==="c")b.append(h("div",{class:"logo round"},"🚀"),h("div",{class:"txt"},h("b",null,"DeskOps Assistente"),h("small",null,"Help Desk B2B")));
   else b.append(h("div",{class:"logo"},"🎧"),h("div",{class:"txt"},h("b",null,"DeskOps.AI"),h("small",null,v==="e"?"Workspace do Analista":"Painel do Gestor")));
   render();scrollTo(0,0)}
 addEventListener("hashchange",()=>{const x=location.hash.slice(1);if(["cliente","equipe","gestor"].includes(x)&&x!==viewNow){viewNow=x;route()}});
@@ -1151,7 +1151,7 @@ const Speak=(function(){
   return{ok:OK,unlock,stop,bot,me,announce,toggle,btn,paint}})();
 function bubble(w,content,at,voz){const isMe=w==="me";
   return h("div",{class:"msg "+w},isMe?av(nome||"Você",30):h("div",{class:"logo round",style:"width:30px;height:30px;font-size:.9rem"},"🚀"),
-    h("div",{class:"col"},h("div",{class:"meta"},(isMe?"Você":"SpaceX Assistente")+(voz?" · 🎤 transcrito por voz":"")+" · "+hm(at||Date.now())),h("div",{class:"bub"},content),!isMe?Speak.btn(content[0]):null))}
+    h("div",{class:"col"},h("div",{class:"meta"},(isMe?"Você":"DeskOps Assistente")+(voz?" · 🎤 transcrito por voz":"")+" · "+hm(at||Date.now())),h("div",{class:"bub"},content),!isMe?Speak.btn(content[0]):null))}
 function say(t,w,extra,voz){if(w==="me")Speak.me(voz);else if(w==="bot")Speak.bot(t,extra);(dd.conv=dd.conv||[]).push(voz?{w,t,at:Date.now(),voz:true}:{w,t,at:Date.now()});if(voz)dd.voz=true;const m=$("msgs");
   const content=[t];if(extra)content.push(extra);m.append(bubble(w,content,null,voz));m.scrollTop=m.scrollHeight;if(w==="me")setTimeout(()=>{try{Agent.analyze()}catch(e){}},0)}
 async function typing(ms){const m=$("msgs"),t=h("div",{class:"msg bot",id:"typing"},h("div",{class:"logo round",style:"width:30px;height:30px;font-size:.9rem"},"🚀"),h("div",{class:"bub typing"},h("i"),h("i"),h("i")));
@@ -1319,7 +1319,7 @@ async function afterDone(t,v,c){chatDone=false;say(t,"me",null,v);const fid0=flo
     if(a.startsWith("🆕")||/novo/.test(norm(a))){startFlow(t,v);return}
     const cc=list.find(x=>x.id===c.id)||c;(cc.mensagens=cc.mensagens||[]).push({w:"me",by:cc.usuario,t,at:Date.now()});addHist(cc,"colaborador adicionou informação pelo chat");await save(cc);
     await typing(300);say("Pronto! Adicionei ao chamado #"+cc.num+" e avisei "+(cc.atendente?cc.atendente:"a equipe de "+SETOR_NOME[cc.setor])+".","bot");chatDone=true;postChips(cc)}catch(e){if(e!==ABORT)console.error(e)}}
-function chatNote(t){if($("chatbox").hidden)return;Speak.bot(t);const m=$("msgs");m.append(h("div",{class:"msg bot"},h("div",{class:"logo round",style:"width:30px;height:30px;font-size:.9rem"},"🚀"),h("div",{class:"col"},h("div",{class:"meta"},"SpaceX Assistente · atualização automática · "+hm(Date.now())),h("div",{class:"bub",style:"border-color:var(--pri)"},t))));m.scrollTop=m.scrollHeight}
+function chatNote(t){if($("chatbox").hidden)return;Speak.bot(t);const m=$("msgs");m.append(h("div",{class:"msg bot"},h("div",{class:"logo round",style:"width:30px;height:30px;font-size:.9rem"},"🚀"),h("div",{class:"col"},h("div",{class:"meta"},"DeskOps Assistente · atualização automática · "+hm(Date.now())),h("div",{class:"bub",style:"border-color:var(--pri)"},t))));m.scrollTop=m.scrollHeight}
 function track(id){hlId=id;openClient.add(id);render();const el=$("ct-"+id);if(el){el.scrollIntoView({behavior:"smooth",block:"center"})}setTimeout(()=>{hlId=null;render()},2600)}
 function startChat(){Speak.unlock();nome=$("nome").value.trim();depto=$("depto").value;if(!nome){$("nome").focus();toast("Informe o seu nome para começar.");return}
   ls.set("cliente",{nome,depto});$("welcome").hidden=true;$("chatbox").hidden=false;$("restart").hidden=false;startFlow();setTimeout(()=>$("txt").focus(),50);render()}
@@ -1459,7 +1459,7 @@ const collabText=c=>[c.descricao,c.detalhe].concat((c.conversa||[]).filter(x=>x.
 function routeAdvice(c){const txt=[c.descricao,c.detalhe].concat((c.mensagens||[]).filter(x=>x.w==="me").map(x=>x.t)).join(" ");const free=classifyRules(txt);
   return{free,mismatch:free.setor!==c.setor&&free.score>=3,hits:ruleHits(txt,free.rule)}}
 function redirectTicket(c,setor,motivo){const old=c.setor,r=classifyRules(collabText(c),{setor});c.setor=setor;c.categoria=r.categoria;c.subcategoria=r.sub;c.nivel=nivelPara(setor,c.prioridade);c.status="encaminhado";c.atendente=null;
-  (c.mensagens=c.mensagens||[]).push({w:"bot",by:"Assistente SpaceX",t:"Seu chamado foi redirecionado pelo agente de IA da equipe de "+SETOR_NOME[old]+" para a equipe de "+SETOR_NOME[setor]+", que é a responsável por esse assunto. O prazo de SLA continua o mesmo.",at:Date.now()});
+  (c.mensagens=c.mensagens||[]).push({w:"bot",by:"Assistente DeskOps",t:"Seu chamado foi redirecionado pelo agente de IA da equipe de "+SETOR_NOME[old]+" para a equipe de "+SETOR_NOME[setor]+", que é a responsável por esse assunto. O prazo de SLA continua o mesmo.",at:Date.now()});
   c.redirecionado={de:old,para:setor,motivo};addHist(c,"redirecionado pelo agente de IA: "+SETOR_NOME[old]+" → "+SETOR_NOME[setor]+(motivo?" (sinais: "+motivo+")":""),me&&me.nome);save(c);toast("Chamado #"+c.num+" redirecionado para "+SETOR_NOME[setor]+".")}
 /* respostas do colaborador coerentes com a última mensagem do analista e com o cenário do chamado */
 const GEN_SC={info:["Segue a informação que faltava"],persist:"o problema continua igual",urg:"Preciso disso com urgência",extra:"Tenho mais um detalhe para acrescentar",ev:[["📎 Print ou documento","file","print.png"]],an:[]};
@@ -1497,7 +1497,7 @@ function collabOptions(c){const sc=scenarioOf(c)||GEN_SC,ms=c.mensagens||[],last
 function sendCollab(c,t,anexo,sim){(c.mensagens=c.mensagens||[]).push(Object.assign({w:"me",by:c.usuario,t,at:Date.now()},sim?{sim:true}:{}));
   if(anexo){c.anexos=(c.anexos||[]).concat([{nome:anexo,tam:148000}]);(c.evidencias=c.evidencias||[]).push({tipo:"Anexo",valor:anexo,at:Date.now()})}
   if(/^⏰/.test(t)&&c.prioridade!=="crítica"&&!c.urgPedida){c.urgPedida=true;c.prioridade=PRIO[PRIO.indexOf(c.prioridade)+1];c.venc=c.ts+SLA_MIN[c.prioridade]*60000;c.nivel=nivelPara(c.setor,c.prioridade);addHist(c,"prioridade elevada para "+c.prioridade+" (urgência informada pelo colaborador)")}
-  c.mensagens.push({w:"bot",by:"Assistente SpaceX",t:autoAck(c,t,anexo),at:Date.now()+1});
+  c.mensagens.push({w:"bot",by:"Assistente DeskOps",t:autoAck(c,t,anexo),at:Date.now()+1});
   addHist(c,sim?"resposta do colaborador (simulada na demonstração)":"colaborador respondeu",sim&&me?me.nome:null);save(c)}
 function autoAck(c,t,anexo){const who=c.atendente||"a equipe de "+SETOR_NOME[c.setor],n=norm(t),avisado=c.atendente?c.atendente+" foi avisado(a)":"A equipe de "+SETOR_NOME[c.setor]+" foi avisada";
   if(anexo||/^📎/.test(t))return"Arquivo recebido ✓ e anexado ao chamado. "+cap(who)+" já pode analisar.";
@@ -1646,9 +1646,9 @@ function renderTri(c){const p=$("p-tri");p.textContent="";
     h("div",{class:"row",style:"margin-top:8px"},h("button",{class:"btn ghost sm",onclick:()=>{c.notas=ta.value.trim();delete drafts["nota-"+c.id];addHist(c,"nota interna atualizada",me.nome);save(c);toast("Nota salva.")}},"Salvar nota"),c.notas?h("small",null,"Visível só para a equipe"):null)));
   // conversa
   const cv=h("div",{class:"conv"});
-  (c.conversa&&c.conversa.length?c.conversa:[{w:"bot",t:"Sem conversa registrada para este chamado."}]).forEach(x=>cv.append(convMsg(x.w==="me"?"user":"bot",x.t,(x.w==="me"?c.usuario:"Assistente SpaceX")+(x.voz?" · 🎤 transcrito por voz":""),x.at)));
+  (c.conversa&&c.conversa.length?c.conversa:[{w:"bot",t:"Sem conversa registrada para este chamado."}]).forEach(x=>cv.append(convMsg(x.w==="me"?"user":"bot",x.t,(x.w==="me"?c.usuario:"Assistente DeskOps")+(x.voz?" · 🎤 transcrito por voz":""),x.at)));
   cv.append(h("div",{class:"divider"},"Chamado #"+c.num+" aberto · "+fmt(c.ts)));
-  (c.mensagens||[]).forEach(m=>cv.append(convMsg(m.w==="agent"?"agent":m.w==="bot"?"bot":"user",m.t,m.w==="bot"?"Assistente SpaceX · resposta automática":m.by+(m.sim?" · 🎭 simulado":""),m.at)));
+  (c.mensagens||[]).forEach(m=>cv.append(convMsg(m.w==="agent"?"agent":m.w==="bot"?"bot":"user",m.t,m.w==="bot"?"Assistente DeskOps · resposta automática":m.by+(m.sim?" · 🎭 simulado":""),m.at)));
   if(c.status==="resolvido"&&c.solucao&&!c.ia)cv.append(h("div",{class:"divider"},"Resolvido · "+fmt(c.resolvidoTs||c.ts)));
   const conv=h("div",{class:"card"},h("div",{class:"row"},h("div",{class:"sp"},h("h3",null,"💬 Histórico da conversa de triagem"),h("small",null,"Interação entre o assistente virtual e "+c.usuario.split(" ")[0]+" antes do transbordo para o analista")),h("span",{class:"pill s-atend"},"Capturado automaticamente")),
     h("div",{style:"margin-top:14px"},cv));
@@ -1727,7 +1727,7 @@ function renderRes(c){const p=$("p-res");p.textContent="";
     const nv=selectOf("res-nv-"+id,NIVEIS,c.nivel&&NIVEIS.includes(c.nivel)?c.nivel:"Nível 3 · Cloud & DevOps");
     const sv=selectOf("res-sv-"+id,SETORES.map(s=>[s,"Equipe de "+SETOR_NOME[s]]),c.setor);
     const side=h("div",{class:"stack"},
-      h("div",{class:"card"},h("h3",null,"📣 Prévia da notificação ao colaborador"),h("div",{class:"teams",style:"margin-top:12px"},h("div",{class:"hd"},h("span",null,"SpaceX Help Desk"),h("span",null,"Agora")),h("b",null,"Seu chamado #"+c.num+" foi resolvido!"),prev,h("small",null,"Por favor, avalie o atendimento:"),h("div",{style:"color:#f5b301;font-size:1.1rem;margin-top:4px"},"★ ★ ★ ★ ★"))),
+      h("div",{class:"card"},h("h3",null,"📣 Prévia da notificação ao colaborador"),h("div",{class:"teams",style:"margin-top:12px"},h("div",{class:"hd"},h("span",null," DeskOps Assistente"),h("span",null,"Agora")),h("b",null,"Seu chamado #"+c.num+" foi resolvido!"),prev,h("small",null,"Por favor, avalie o atendimento:"),h("div",{style:"color:#f5b301;font-size:1.1rem;margin-top:4px"},"★ ★ ★ ★ ★"))),
       h("div",{class:"card"},h("h3",null,"↗️ Reatribuir / escalonar"),h("small",null,"Caso precise transferir este chamado para outro nível de suporte ou outro setor."),
         h("label",{class:"f"},"Transferir para o nível"),nv,h("label",{class:"f"},"Setor responsável"),sv,
         h("button",{class:"btn ghost block",style:"margin-top:12px",onclick:()=>{const oldS=c.setor;c.nivel=nv.value;

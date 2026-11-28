@@ -1,7 +1,7 @@
 # 🎧 DeskOps.AI – Protótipo Evolutivo
 
 Protótipo de Help Desk B2B com triagem conversacional, motor local de regras e IA generativa opcional, desenvolvido como projeto em grupo da disciplina de **Engenharia de Software**.
-O SpaceX Assistente é o agente conversacional do DeskOps.AI.
+Agente conversacional: DeskOps Assistente
 
 > **Versão atual:** 5 (protótipo evolutivo)
 > **Demonstração online:** https://mariamotaaraujo1-star.github.io/DeskOps.AI/
@@ -62,7 +62,7 @@ Ao finalizar a conversa, o motor local de regras classifica automaticamente o ch
 | Ator | Descrição |
 |------|-----------|
 | **Cliente** | Colaborador que precisa de suporte e abre chamados pelo chat |
-| **Analista** | Membro da equipe de um setor (TI, RH ou Financeiro) que atende os chamados |
+| **Analista** | Membro da equipe de um setor (TI, RH, Financeiro e Fiscal, Administrativo, Jurídico ou Compras) que atende os chamados |
 | **Gestor** | Analista com visão de todos os setores |
 | **Agente de IA** | Componente que classifica chamados e sugere diagnósticos |
 
